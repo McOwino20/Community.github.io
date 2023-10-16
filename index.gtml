@@ -1,1 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        section {
+            padding: 2rem;
+            border-bottom: 1px solid #ccc;
+        }
+        h2 {
+            margin-bottom: 1rem;
+        }
+        ul {
+            list-style: disc;
+            padding-left: 1.5rem;
+        }
+        .comment {
+            border: 1px solid #ccc;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .comment button {
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+        #thankYouMessage {
+            display: none;
+            color: green;
+            font-weight: bold;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+    </style>
+    <script>
+        var developerId = "12345"; // Replace with the actual developer ID
+        
+        function postComment() {
+            var username = document.getElementById("username").value;
+            var commentText = document.getElementById("commentText").value;
+            
+            if (username !== "" && commentText !== "") {
+                var commentDiv = document.createElement("div");
+                commentDiv.className = "comment";
+                commentDiv.innerHTML = "<p><strong>" + username + ":</strong> " + commentText + "</p><button onclick='deleteComment(this.parentNode)'>Delete Comment</button>";
+                
+                document.getElementById("comments").appendChild(commentDiv);
+                
+                // Clear input fields
+                document.getElementById("username").value = "";
+                document.getElementById("commentText").value = "";
+                
+                // Show thank you message
+                document.getElementById("thankYouMessage").style.display = "block";
+            }
+        }
 
+        function deleteComment(commentDiv) {
+            var enteredId = prompt("Please enter your developer ID:");
+
+            if (enteredId === developerId) {
+                commentDiv.remove();
+            } else {
+                alert("Invalid developer ID. You are not authorized to delete comments.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Our Community!</h1>
+    </header>
+    
+    <section id="introduction">
+        <h2>About Us</h2>
+        <p>Learn about our vibrant community and what we're all about.</p>
+    </section>
+    
+    <section id="events">
+        <h2>Upcoming Events</h2>
+        <ul>
+            <li>Community BBQ - August 20th</li>
+            <li>Workshop: DIY Gardening - August 25th</li>
+            <li>Monthly Book Club - September 2nd</li>
+        </ul>
+    </section>
+    
+    <section id="discussions">
+        <h2>Join the Conversation</h2>
+        <p>Engage in discussions on a wide range of topics with fellow community members.</p>
+        <a href="link-to-discussion-forum">Go to Discussion Forum</a>
+    </section>
+    
+    <section id="comments">
+        <h2>Public Comments</h2>
+        <p>Read what others have to say about our community:</p>
+        
+        <!-- Existing comments will be dynamically added here -->
+        
+        <div class="comment">
+            <p><strong>User123:</strong> I love being part of this community. Everyone is so friendly!</p>
+            <button onclick="deleteComment(this.parentNode)">Delete Comment</button>
+        </div>
+        
+        <div class="comment">
+            <p><strong>GardenerGirl:</strong> The gardening workshop was terrible. Not worth my time.</p>
+            <button onclick="deleteComment(this.parentNode)">Delete Comment</button>
+        </div>
+    </section>
+    
+    <section id="add-comment">
+        <h2>Add Your Comment</h2>
+        <input type="text" id="username" placeholder="Your Username">
+        <br><br>
+        <textarea id="commentText" placeholder="Write your comment here" row="50" cols="22" ></textarea>
+        <br><br>
+        <button onclick="postComment()">Post Comment</button>
+    </section>
+    
+    <section id="thankYouMessage">
+        <p>Thank you for submitting your comment!</p>
+    </section>
+    
+    <section id="membership">
+        <h2>Become a Member</h2>
+        <p>Interested in joining our community? Learn about the benefits of becoming a member.</p>
+        <a href="membership-info">Membership Details</a>
+    </section>
+    
+    <footer>
+        <p>© McOwino 2023. All rights reserved</p>
+    </footer>
+</body>
+</html>
